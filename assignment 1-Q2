@@ -1,0 +1,33 @@
+import tensorflow as tf
+
+a=tf.constant(5)
+b=tf.constant(2)
+c=tf.constant(3)
+#with tf.name_scope("Operations"):
+with tf.name_scope("scope_one"):
+        d=tf.square(a,name= "a_square")
+with tf.name_scope("scope_2"):
+    e=tf.square(b,name="b_square")
+with tf.name_scope("scope_3"):
+     f=tf.square(c,name= "c_square")
+with tf.name_scope("scope_4"):
+    g=tf.multiply(a,b, name="multiply")
+    h=tf.multiply(2,g,name="2ab")
+with tf.name_scope("scope_5"):
+    i=tf.multiply(b,c, name="multiply")
+    j=tf.multiply(2,i,name="2bc")
+with tf.name_scope("scope_6"):
+    k=tf.multiply(a,c, name="multiply")
+    l=tf.multiply(2,k,name="2ac")
+with tf.name_scope("scope_7"):
+    m=tf.add(d,e,name="a2_b2")
+    n=tf.add(m,f,name="m2_c2")
+    o=tf.subtract(n,h,name="n_h")
+    p=tf.subtract(o,j,name="o_h")
+    q=tf.add(p,l,name="p_l")
+    
+    
+with tf.Session() as sess:
+    writer = tf.summary.FileWriter("/tmp/tboard/out1", sess.graph)
+    print(sess.run(q))
+    writer.close()
